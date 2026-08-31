@@ -1,6 +1,6 @@
 # template-module-repo
 
-> **GitHub _template_ repository.** "Use this template" to start a new module.
+> **GitHub _template_ repository.** "Use this template" to start a new module. Terraform modules.
 
 The golden path for a MODULE (a published, versioned contract). Different from
 template-service-repo: modules are TESTED and PUBLISHED, not deployed.
