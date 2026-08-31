@@ -3,6 +3,7 @@ locals {
   mandatory_tags = {
     ManagedBy = "terraform"
     Module    = "REPLACE-ME"
+    Name      = var.name
   }
   tags = merge(local.mandatory_tags, var.tags)
 }
