@@ -1,0 +1,54 @@
+## commented out for now temporarily.
+
+# name: sync-ai-context
+
+# on:
+#   schedule:
+#     - cron: "0 15 * * 1"
+#   workflow_dispatch: {}
+
+# permissions:
+#   contents: write
+#   pull-requests: write
+
+# env:
+#   SOURCE_REPO: EXAMPLE-ORG/org-ai-context
+#   SOURCE_PATH: module-authoring.md
+#   DEST_PATH: .ai/module-authoring.md
+
+# jobs:
+#   sync:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Fetch central baseline
+#         env:
+#           GH_TOKEN: ${{ secrets.AI_CONTEXT_TOKEN || github.token }}
+#         run: |
+#           set -euo pipefail
+#           mkdir -p "$(dirname "${DEST_PATH}")"
+#           gh api -H "Accept: application/vnd.github.raw" \
+#             "repos/${SOURCE_REPO}/contents/${SOURCE_PATH}" > "${DEST_PATH}.incoming"
+#       - name: Detect change
+#         id: diff
+#         run: |
+#           set -euo pipefail
+#           if [ -f "${DEST_PATH}" ] && cmp -s "${DEST_PATH}.incoming" "${DEST_PATH}"; then
+#             echo "changed=false" >> "$GITHUB_OUTPUT"
+#           else
+#             mv "${DEST_PATH}.incoming" "${DEST_PATH}"
+#             echo "changed=true" >> "$GITHUB_OUTPUT"
+#           fi
+#           rm -f "${DEST_PATH}.incoming"
+#       - name: Open PR if changed
+#         if: steps.diff.outputs.changed == 'true'
+#         uses: peter-evans/create-pull-request@v6
+#         with:
+#           branch: chore/sync-ai-baseline
+#           delete-branch: true
+#           title: "chore: sync module-authoring baseline"
+#           commit-message: "chore: sync module-authoring baseline from ${{ env.SOURCE_REPO }}"
+#           body: "Automated sync of the module-authoring baseline. Review and merge."
+#           labels: |
+#             ai-context
+#             automated

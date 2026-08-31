@@ -1,0 +1,18 @@
+# THIN CALLER -> reusable MODULE CI (test/lint/scan, NO deploy).
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: DevAndOps/dot-github-repo/.github/workflows/reusable-module-ci.yml@v1
+    with:
+      module_dir: "."
+      examples_dir: "examples"
+      tests_dir: "tests"

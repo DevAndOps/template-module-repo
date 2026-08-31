@@ -1,0 +1,24 @@
+# CODEOWNERS — module repo
+#
+# Maps file paths to the people/teams who must review changes to them. When a PR
+# touches a matching path, GitHub auto-requests review from the owners listed.
+#
+# This file only REQUESTS reviewers by itself. To make owner approval MANDATORY
+# before merge, the branch ruleset must set require_code_owner_review = true
+# (managed in repo-governance). File + rule together = "the right people signed
+# off on the code."
+#
+# Syntax: <path-pattern>   <owner> [<owner> ...]
+#   - owners are @user or @org/team (teams need write access to the repo)
+#   - LAST matching line wins, so put specific paths BELOW the catch-all
+#   - replace every REPLACE-ME before relying on this
+#
+# ---------------------------------------------------------------------------
+
+# Default owner for everything in the repo (the catch-all).
+*                       @DevAndOps
+
+# CI, policy, and ownership itself — guard these tightly. Changes to who-owns-what
+# or to the guardrails should go through the platform team.
+/.github/               @DevAndOps
+/.github/CODEOWNERS     @DevAndOps
