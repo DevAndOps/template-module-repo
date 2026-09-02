@@ -1,6 +1,5 @@
 # EXAMPLE-ORG module-authoring baseline (shared across all module repos)
 
-
 Read this when editing a published Terraform module. A module is a CONTRACT
 many repos depend on. The rules here protect that contract.
 
